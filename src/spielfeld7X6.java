@@ -55,13 +55,13 @@ class spielfeld7X6 {
         int i, j, k, m, anz;
 // 	Test auf 4 Steine waagerecht
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 6; k++) {
+            for (k = 1; k < 7; k++) {
                 anz = 1;
                 j = k;
                 while (feld[i][j] == feld[i][j + 1] & feld[i][j] != 0) {
                     anz++;
                     j++;
-                    System.out.println("i= " + i + " j = " + k + " anz= " + anz);
+               //     System.out.println("i= " + i + " j = " + k + " anz= " + anz);
                 }
                 if (anz == 4) {
                     w = feld[i][j];
@@ -76,7 +76,7 @@ class spielfeld7X6 {
                 while (feld[j][k] == feld[j - 1][k] & feld[j][k] != 0) {
                     anz++;
                     j--;
-                    System.out.println("i= " + i + " k= " + k + " anz= " + anz);
+                  //  System.out.println("i= " + i + " k= " + k + " anz= " + anz);
 
                 }
                 if (anz == 4) {
@@ -86,7 +86,7 @@ class spielfeld7X6 {
             }
 //		 	Test auf 4 Steine diagonal rechts
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 6; k++) {
+            for (k = 1; k < 7; k++) {
                 anz = 1;
                 j = k;
                 m = i;
@@ -106,13 +106,13 @@ class spielfeld7X6 {
             }
         //		 	Test auf 4 Steine diagonal links
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 6; k++) {
+            for (k = 1; k < 7; k++) {
                 anz = 1;
                 j = k;
                 m = i;
-                while (feld[m][j] == feld[m + 1][j - 1] & feld[m][j] != 0) {
+                while (feld[m][j] == feld[m - 1][j - 1] & feld[m][j] != 0) {
                     anz++;
-                    j++;
+                    j--;
                     m--;
                     System.out.println("m= " + m + " j= " + j + " anz= " + anz);
 
