@@ -4,13 +4,37 @@ class spielfeld7X6 {
     Scanner sc = new Scanner(System.in);
     private int[][] feld;
     private int s = 1; // Spielernr
+    boolean mitComputer;
 
     spielfeld7X6() {
-            feld = new int[8][9];
-            for (int i = 0; i < 8; i++)
-                for (int j = 0; j < 9; j++)
-                    feld[i][j] = 0;
+        feld = new int[8][9];
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 9; j++)
+                feld[i][j] = 0;
+    }
+
+    int werBeginnt() {
+        System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Spieler X)");
+        s = sc.nextInt();
+        if (s < 1 || s > 2) {
+            System.out.println("Falsche Eingabe - bitte wiederholen");
+            werBeginnt();
         }
+        return s;
+    }
+
+    void askMitComp() {
+        System.out.println("Möchten Sie gegen Computer spielen? (j/n)");
+        String answer = sc.next();
+        if (answer.equals("j")) {
+            this.mitComputer = true;
+        } else if (answer.equals("n")) {
+            this.mitComputer = false;
+        } else {
+            System.out.println("Falsche Eingabe - bitte wiederholen!");
+            askMitComp();
+        }
+    }
 
     void ausgabe() {
         System.out.println("     1     2     3     4     5     6     7");
@@ -32,43 +56,46 @@ class spielfeld7X6 {
     }
 
     void zug() {
-        int sn = 0, zn = 1;
-        if (s == 1)
-            System.out.print(" Spieler O bitte Spalte wählen :  ");
-        else
-            System.out.print(" Spieler X bitte Spalte wählen :  ");
-        sn = sc.nextInt();
-// Spalte auf leer testen
-        while (feld[zn][sn] == 0 & zn < 7) {
-            feld[zn][sn] = s;
-            feld[zn - 1][sn] = 0;
-            zn++;
-        }
-        if (s == 1)
-            s = 2;
-        else
-            s = 1;
-    }
-
-    void zufallZug() {
-        int sn = 0, zn = 1;
-        if (s == 1) {
-            System.out.print(" Spieler O bitte Spalte wählen :  ");
+        if (mitComputer = false) { //zwei Spieler
+            int sn = 0, zn = 1;
+            if (s == 1)
+                System.out.print(" Spieler O bitte Spalte wählen :  ");
+            else if (s == 2)
+                System.out.print(" Spieler X bitte Spalte wählen :  ");
             sn = sc.nextInt();
-        } else
-            sn = (int) (Math.random() * 6) + 1;
-        System.out.print(" Der Computer hat gewählt Spalte :  " + sn);
-        while (feld[zn][sn] == 0 & zn < 7) {
-            feld[zn][sn] = s;
-            feld[zn - 1][sn] = 0;
-            zn++;
+            if (sn < 1 || sn > 7) {
+                System.out.println(" Wählen sie bitte zwischen Spalten 1-7");
+                sn = sc.nextInt();
+            }
+// Spalte auf leer testen
+            while (feld[zn][sn] == 0 & zn < 7) {
+                feld[zn][sn] = s;
+                feld[zn - 1][sn] = 0;
+                zn++;
+            }
+            if (s == 1)
+                s = 2;
+            else
+                s = 1;
+        } else {   //Spieler gegen Computer (zufall Zug)
+            int sn = 0, zn = 1;
+            if (s == 1) {
+                System.out.print(" Spieler O bitte Spalte wählen :  ");
+                sn = sc.nextInt();
+            } else
+                sn = (int) (Math.random() * 6) + 1;
+            System.out.println(" Der Computer hat seinen Zug gemacht");
+            while (feld[zn][sn] == 0 & zn < 7) {
+                feld[zn][sn] = s;
+                feld[zn - 1][sn] = 0;
+                zn++;
+            }
+            if (s == 1)
+                s = 2;
+            else
+                s = 1;
         }
-        if (s == 1)
-            s = 2;
-        else
-            s = 1;
     }
-
 
     int gewonnen() {
         int w = 0;
@@ -114,12 +141,12 @@ class spielfeld7X6 {
                     anz++;
                     j++;
                     m--;
-                    System.out.println("m= " + m + " j= " + j + " anz= " + anz);
+                    //  System.out.println("m= " + m + " j= " + j + " anz= " + anz);
 
                 }
                 if (anz == 4) {
                     w = feld[m][j];
-                    System.out.println("anz= " + anz + " w= " + w);
+                    //System.out.println("anz= " + anz + " w= " + w);
 
                     break;
                 }
@@ -134,12 +161,12 @@ class spielfeld7X6 {
                     anz++;
                     j--;
                     m--;
-                    System.out.println("m= " + m + " j= " + j + " anz= " + anz);
+                    // System.out.println("m= " + m + " j= " + j + " anz= " + anz);
 
                 }
                 if (anz == 4) {
                     w = feld[m][j];
-                    System.out.println("anz= " + anz + " w= " + w);
+                   // System.out.println("anz= " + anz + " w= " + w);
 
                     break;
                 }
