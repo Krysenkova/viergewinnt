@@ -6,11 +6,11 @@ class spielfeld7X6 {
     private int s = 1; // Spielernr
 
     spielfeld7X6() {
-        feld = new int[8][9];
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 9; j++)
-                feld[i][j] = 0;
-    }
+            feld = new int[8][9];
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 9; j++)
+                    feld[i][j] = 0;
+        }
 
     void ausgabe() {
         System.out.println("     1     2     3     4     5     6     7");
@@ -50,18 +50,38 @@ class spielfeld7X6 {
             s = 1;
     }
 
+    void zufallZug() {
+        int sn = 0, zn = 1;
+        if (s == 1) {
+            System.out.print(" Spieler O bitte Spalte wählen :  ");
+            sn = sc.nextInt();
+        } else
+            sn = (int) (Math.random() * 6) + 1;
+        System.out.print(" Der Computer hat gewählt Spalte :  " + sn);
+        while (feld[zn][sn] == 0 & zn < 7) {
+            feld[zn][sn] = s;
+            feld[zn - 1][sn] = 0;
+            zn++;
+        }
+        if (s == 1)
+            s = 2;
+        else
+            s = 1;
+    }
+
+
     int gewonnen() {
         int w = 0;
         int i, j, k, m, anz;
 // 	Test auf 4 Steine waagerecht
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 7; k++) {
+            for (k = 1; k <= 7; k++) {
                 anz = 1;
                 j = k;
                 while (feld[i][j] == feld[i][j + 1] & feld[i][j] != 0) {
                     anz++;
                     j++;
-               //     System.out.println("i= " + i + " j = " + k + " anz= " + anz);
+                    //     System.out.println("i= " + i + " j = " + k + " anz= " + anz);
                 }
                 if (anz == 4) {
                     w = feld[i][j];
@@ -70,13 +90,13 @@ class spielfeld7X6 {
             }
 //	 	Test auf 4 Steine senkrecht
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 7; k++) {
+            for (k = 1; k <= 7; k++) {
                 anz = 1;
                 j = i;
                 while (feld[j][k] == feld[j - 1][k] & feld[j][k] != 0) {
                     anz++;
                     j--;
-                  //  System.out.println("i= " + i + " k= " + k + " anz= " + anz);
+                    //  System.out.println("i= " + i + " k= " + k + " anz= " + anz);
 
                 }
                 if (anz == 4) {
@@ -86,7 +106,7 @@ class spielfeld7X6 {
             }
 //		 	Test auf 4 Steine diagonal rechts
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 7; k++) {
+            for (k = 1; k <= 7; k++) {
                 anz = 1;
                 j = k;
                 m = i;
@@ -106,7 +126,7 @@ class spielfeld7X6 {
             }
         //		 	Test auf 4 Steine diagonal links
         for (i = 6; i > 0; i--)
-            for (k = 1; k < 7; k++) {
+            for (k = 1; k <= 7; k++) {
                 anz = 1;
                 j = k;
                 m = i;
@@ -125,11 +145,17 @@ class spielfeld7X6 {
                 }
             }
 // 	Gewinner ausgeben
-        if (w == 1)
-            System.out.println(" Spieler O hat gewonnen");
-        else if (w == 2)
-            System.out.println(" Spieler X hat gewonnen");
+        if (w == 1) {
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+            System.out.println("★           Spieler O hat gewonnen           ★");
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+        } else if (w == 2) {
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+            System.out.println("★           Spieler X hat gewonnen           ★");
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+        }
         return w;
+
     }
 
 }
