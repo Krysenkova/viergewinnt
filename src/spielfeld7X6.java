@@ -13,27 +13,32 @@ class spielfeld7X6 {
                 feld[i][j] = 0;
     }
 
+    void askMitComp() {
+        System.out.println("Möchten Sie gegen Computer spielen? (j/n)");
+        String answer = sc.next();
+        if (answer.equals("j")) {
+            mitComputer = true;
+        } else if (answer.equals("n")) {
+            mitComputer = false;
+        } else {
+            System.out.println("Falsche Eingabe - bitte wiederholen!");
+            askMitComp();
+        }
+    }
+
     int werBeginnt() {
-        System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Spieler X)");
+        if (mitComputer == true){
+            System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Computer)");}
+        else{
+            System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Spieler X)");
+        }
+
         s = sc.nextInt();
         if (s < 1 || s > 2) {
             System.out.println("Falsche Eingabe - bitte wiederholen");
             werBeginnt();
         }
         return s;
-    }
-
-    void askMitComp() {
-        System.out.println("Möchten Sie gegen Computer spielen? (j/n)");
-        String answer = sc.next();
-        if (answer.equals("j")) {
-            this.mitComputer = true;
-        } else if (answer.equals("n")) {
-            this.mitComputer = false;
-        } else {
-            System.out.println("Falsche Eingabe - bitte wiederholen!");
-            askMitComp();
-        }
     }
 
     void ausgabe() {
@@ -56,7 +61,7 @@ class spielfeld7X6 {
     }
 
     void zug() {
-        if (mitComputer = false) { //zwei Spieler
+        if (mitComputer == false) { //zwei Spieler
             int sn = 0, zn = 1;
             if (s == 1)
                 System.out.print(" Spieler O bitte Spalte wählen :  ");
@@ -166,7 +171,7 @@ class spielfeld7X6 {
                 }
                 if (anz == 4) {
                     w = feld[m][j];
-                   // System.out.println("anz= " + anz + " w= " + w);
+                    // System.out.println("anz= " + anz + " w= " + w);
 
                     break;
                 }
