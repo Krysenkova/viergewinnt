@@ -5,8 +5,7 @@ class spielfeld7X6 {
     private int[][] feld;
     private int s = 1; // Spielernr
     private boolean mitComputer;
-    private int spalten;
-    private int zeilen;
+    boolean weiter;
 
     spielfeld7X6() {
         feld = new int[8][9];
@@ -29,9 +28,9 @@ class spielfeld7X6 {
     }
 
     int werBeginnt() {
-        if (mitComputer == true){
-            System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Computer)");}
-        else{
+        if (mitComputer == true) {
+            System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Computer)");
+        } else {
             System.out.println("Wer beginnt das Spiel? (1 - Spieler O; 2 - Spieler X)");
         }
 
@@ -115,7 +114,6 @@ class spielfeld7X6 {
                 while (feld[i][j] == feld[i][j + 1] & feld[i][j] != 0) {
                     anz++;
                     j++;
-                    //     System.out.println("i= " + i + " j = " + k + " anz= " + anz);
                 }
                 if (anz == 4) {
                     w = feld[i][j];
@@ -130,8 +128,6 @@ class spielfeld7X6 {
                 while (feld[j][k] == feld[j - 1][k] & feld[j][k] != 0) {
                     anz++;
                     j--;
-                    //  System.out.println("i= " + i + " k= " + k + " anz= " + anz);
-
                 }
                 if (anz == 4) {
                     w = feld[j][k];
@@ -148,13 +144,9 @@ class spielfeld7X6 {
                     anz++;
                     j++;
                     m--;
-                    //  System.out.println("m= " + m + " j= " + j + " anz= " + anz);
-
                 }
                 if (anz == 4) {
                     w = feld[m][j];
-                    //System.out.println("anz= " + anz + " w= " + w);
-
                     break;
                 }
             }
@@ -168,13 +160,9 @@ class spielfeld7X6 {
                     anz++;
                     j--;
                     m--;
-                    // System.out.println("m= " + m + " j= " + j + " anz= " + anz);
-
                 }
                 if (anz == 4) {
                     w = feld[m][j];
-                    // System.out.println("anz= " + anz + " w= " + w);
-
                     break;
                 }
             }
@@ -187,8 +175,7 @@ class spielfeld7X6 {
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
             System.out.println("★           Spieler X hat gewonnen           ★");
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-        }
-        else if (w==2 && mitComputer == true){
+        } else if (w == 2 && mitComputer == true) {
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
             System.out.println("★           Computer hat gewonnen           ★");
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
@@ -198,3 +185,5 @@ class spielfeld7X6 {
     }
 
 }
+
+
