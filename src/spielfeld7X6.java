@@ -4,7 +4,9 @@ class spielfeld7X6 {
     Scanner sc = new Scanner(System.in);
     private int[][] feld;
     private int s = 1; // Spielernr
-    boolean mitComputer;
+    private boolean mitComputer;
+    private int spalten;
+    private int zeilen;
 
     spielfeld7X6() {
         feld = new int[8][9];
@@ -68,7 +70,7 @@ class spielfeld7X6 {
             else if (s == 2)
                 System.out.print(" Spieler X bitte Spalte wählen :  ");
             sn = sc.nextInt();
-            if (sn < 1 || sn > 7) {
+            while (sn < 1 || sn > 7) {
                 System.out.println(" Wählen sie bitte zwischen Spalten 1-7");
                 sn = sc.nextInt();
             }
@@ -181,9 +183,14 @@ class spielfeld7X6 {
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
             System.out.println("★           Spieler O hat gewonnen           ★");
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-        } else if (w == 2) {
+        } else if (w == 2 && mitComputer == false) {
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
             System.out.println("★           Spieler X hat gewonnen           ★");
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+        }
+        else if (w==2 && mitComputer == true){
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+            System.out.println("★           Computer hat gewonnen           ★");
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
         }
         return w;
