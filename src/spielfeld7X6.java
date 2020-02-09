@@ -5,7 +5,6 @@ class spielfeld7X6 {
     private int[][] feld;
     private int s = 1; // Spielernr
     private boolean mitComputer;
-    boolean weiter;
 
     spielfeld7X6() {
         feld = new int[8][9];
@@ -73,16 +72,28 @@ class spielfeld7X6 {
                 System.out.println(" Wählen sie bitte zwischen Spalten 1-7");
                 sn = sc.nextInt();
             }
+
 // Spalte auf leer testen
-            while (feld[zn][sn] == 0 & zn < 7) {
+            while (feld[zn][sn] == 0 && zn < 7) {
                 feld[zn][sn] = s;
                 feld[zn - 1][sn] = 0;
                 zn++;
             }
+
+            if (zn <= 1) {
+                System.out.println("Kein Platz mehr - bitte wählen Sie andere Spalte");
+                if (s == 1)
+                    s = 1;
+                else
+                    s = 2;
+                zug();
+            }
+            if (zn > 1){
             if (s == 1)
                 s = 2;
             else
-                s = 1;
+                s = 1;}
+
         } else {   //Spieler gegen Computer (zufall Zug)
             int sn = 0, zn = 1;
             if (s == 1) {
@@ -91,7 +102,7 @@ class spielfeld7X6 {
             } else
                 sn = (int) (Math.random() * 6) + 1;
             System.out.println(" Der Computer hat seinen Zug gemacht");
-            while (feld[zn][sn] == 0 & zn < 7) {
+            while (feld[zn][sn] == 0 && zn < 7) {
                 feld[zn][sn] = s;
                 feld[zn - 1][sn] = 0;
                 zn++;
@@ -181,9 +192,5 @@ class spielfeld7X6 {
             System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
         }
         return w;
-
     }
-
 }
-
-
